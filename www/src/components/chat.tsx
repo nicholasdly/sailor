@@ -9,7 +9,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
-import { censor } from "@/lib/fetchers";
+import { censorFetcher } from "@/lib/fetchers";
 import { formatDate, randomPirateName } from "@/lib/utils";
 
 type Message = {
@@ -44,7 +44,7 @@ function useChat() {
 
   const { trigger, isMutating } = useSWRMutation(
     "http://0.0.0.0:8000/censor",
-    censor,
+    censorFetcher,
     {
       onSuccess: (data) => {
         const message: Message = {

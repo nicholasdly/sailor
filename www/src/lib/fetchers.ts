@@ -1,4 +1,7 @@
-export async function censor(
+export const healthFetcher = (url: string) =>
+  fetch(url, { method: "HEAD" }).then((res) => res.ok);
+
+export async function censorFetcher(
   url: string,
   { arg }: { arg: string },
 ): Promise<string> {

@@ -1,12 +1,21 @@
 from typing import Annotated
 
 from fastapi import Body, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from .sailor import Sailor
 
 app = FastAPI()
 sailor = Sailor()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class CheckRequest(BaseModel):

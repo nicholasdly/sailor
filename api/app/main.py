@@ -3,10 +3,10 @@ from typing import Annotated
 from fastapi import Body, FastAPI
 from pydantic import BaseModel, Field
 
-from .profanity import Profanity
+from .sailor import Sailor
 
 app = FastAPI()
-profanity = Profanity()
+sailor = Sailor()
 
 
 class CheckRequest(BaseModel):
@@ -39,7 +39,7 @@ async def check(request: Annotated[CheckRequest, Body(embed=False)]) -> bool:
     Returns a boolean representing whether or not the provided message string contains profanity.
     """
     body = request.model_dump()
-    return profanity.is_profane(body["message"])
+    return sailor.is_profane(body["message"])
 
 
 @app.post("/censor")
@@ -48,7 +48,7 @@ async def censor(request: Annotated[CensorRequest, Body(embed=False)]) -> str:
     Returns the provided message string, censoring any text deemed as profane.
     """
     body = request.model_dump()
-    return profanity.censor(body["message"])
+    return sailor.censor(body["message"])
 
 
 @app.head("/health")

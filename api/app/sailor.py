@@ -6,13 +6,13 @@ from inflection import pluralize
 BASE_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
 
 
-class Profanity:
+class Sailor:
     profane_words: list[str] = []
     profane_patterns: list[str] = []
 
     def __init__(self) -> None:
         """
-        Initializes an instance of `Profanity`, a profanity filter powered by regex.
+        Initializes an instance of `Sailor`, a profanity filter powered by regex.
         """
         self._load_profanity()
 

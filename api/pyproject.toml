@@ -1,7 +1,7 @@
 [project]
-name = "profanity"
+name = "sailor"
 version = "0.1.0"
-description = "A regular expressions based profanity filtering API in Python using FastAPI."
+description = "A profanity filtering API in Python using regular expressions and FastAPI."
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.121.3",

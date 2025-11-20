@@ -1,18 +1,18 @@
 import pytest
 
-from app import Profanity
+from app import Sailor
 
 
 @pytest.fixture
-def profanity() -> Profanity:
-    return Profanity()
+def sailor() -> Sailor:
+    return Sailor()
 
 
-def test_init(profanity: Profanity):
-    assert profanity.profane_words
-    assert profanity.profane_patterns
-    assert len(profanity.profane_words) > 0
-    assert len(profanity.profane_patterns) > 0
+def test_init(sailor: Sailor):
+    assert sailor.profane_words
+    assert sailor.profane_patterns
+    assert len(sailor.profane_words) > 0
+    assert len(sailor.profane_patterns) > 0
 
 
 @pytest.mark.parametrize(
@@ -29,8 +29,8 @@ def test_init(profanity: Profanity):
         ("bi7ch d4mn", "***** ****"),
     ],
 )
-def test_censor(profanity: Profanity, text: str, expected: str):
-    actual = profanity.censor(text)
+def test_censor(sailor: Sailor, text: str, expected: str):
+    actual = sailor.censor(text)
     assert actual == expected
 
 
@@ -48,6 +48,6 @@ def test_censor(profanity: Profanity, text: str, expected: str):
         ("bi7ch d4mn", True),
     ],
 )
-def test_is_profane(profanity: Profanity, text: str, expected: bool):
-    actual = profanity.is_profane(text)
+def test_is_profane(sailor: Sailor, text: str, expected: bool):
+    actual = sailor.is_profane(text)
     assert actual == expected

@@ -7,8 +7,8 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  api-tests:
-    name: API Testing
+  api:
+    name: API testing
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,27 @@ jobs:
       - name: Run Pytest
         run: uv run pytest
         working-directory: api/
+
+  www:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: www/
+
+      - name: Type check
+        run: npm run typecheck
+        working-directory: www/
+
+      - name: Lint check
+        run: npm run lint
+        working-directory: www/
+
+      - name: Format check
+        run: npm run format:check
+        working-directory: www/

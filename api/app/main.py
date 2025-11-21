@@ -12,8 +12,10 @@ sailor = Sailor()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
+        "http://localhost:5173",  # Local development
+        "http://localhost:4173",  # Local preview
+        "http://localhost:3000",  # Local preview via Docker
+        "https://sailor.chat",  # Production
     ],
     allow_credentials=True,
     allow_methods=["*"],

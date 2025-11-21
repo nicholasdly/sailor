@@ -9,6 +9,7 @@ jobs:
   api:
     name: Deploy API
     runs-on: ubuntu-latest
+    environment: api
     concurrency: deploy-api
 
     steps:
@@ -27,6 +28,7 @@ jobs:
   www:
     name: Deploy website
     runs-on: ubuntu-latest
+    environment: www
     concurrency: deploy-www
 
     steps:

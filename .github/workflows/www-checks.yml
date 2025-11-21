@@ -1,0 +1,41 @@
+name: Check frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - www/**
+      - .github/workflows/www-checks.yml
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    paths:
+      - www/**
+      - .github/workflows/www-checks.yml
+
+jobs:
+  www:
+    name: Frontend linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: www/
+
+      - name: Compile types
+        run: npm run typecheck
+        working-directory: www/
+
+      - name: Run ESLint
+        run: npm run lint
+        working-directory: www/
+
+      - name: Check formatting
+        run: npm run format:check
+        working-directory: www/

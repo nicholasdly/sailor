@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    environment: api
+    concurrency: deploy-api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Fly.io CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
+        working-directory: api/
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_DEPLOY_TOKEN }}
+
+  www:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    environment: www
+    concurrency: deploy-www
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Fly.io CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
+        working-directory: www/
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_WEBSITE_DEPLOY_TOKEN }}

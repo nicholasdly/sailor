@@ -3,6 +3,7 @@ import useSWR from "swr";
 
 import { Chat } from "./components/chat";
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
+import { baseUrl } from "./lib/constants";
 import { healthFetcher } from "./lib/fetchers";
 
 function OutageAlert() {
@@ -23,7 +24,7 @@ export default function App() {
     data: healthy,
     error,
     isLoading,
-  } = useSWR("http://0.0.0.0:8000/health", healthFetcher);
+  } = useSWR(baseUrl + "/health", healthFetcher);
 
   return (
     <main className="mx-auto flex max-w-lg flex-col gap-6 p-4">

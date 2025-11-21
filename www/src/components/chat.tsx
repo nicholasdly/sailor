@@ -9,6 +9,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
+import { baseUrl } from "@/lib/constants";
 import { censorFetcher } from "@/lib/fetchers";
 import { formatDate, randomPirateName } from "@/lib/utils";
 
@@ -43,7 +44,7 @@ function useChat() {
   ]);
 
   const { trigger, isMutating } = useSWRMutation(
-    "http://0.0.0.0:8000/censor",
+    baseUrl + "/censor",
     censorFetcher,
     {
       onSuccess: (data) => {
@@ -88,10 +89,13 @@ export function Chat() {
             }
           }}
         />
-        <InputGroupAddon align="block-end" className="px-3 pt-0! pb-2">
-          <InputGroupText className="text-sm">
-            {280 - input.length} characters left
+        <InputGroupAddon align="block-start" className="border-b px-3 py-2!">
+          <InputGroupText className="font-mono">
+            POST {baseUrl}/censor
           </InputGroupText>
+        </InputGroupAddon>
+        <InputGroupAddon align="block-end" className="px-3 pt-0! pb-2">
+          <InputGroupText>{280 - input.length} characters left</InputGroupText>
           <InputGroupButton
             size="icon-sm"
             className="ml-auto size-6"
@@ -105,7 +109,7 @@ export function Chat() {
       <ul className="flex w-full flex-col gap-3">
         {messages.map(({ id, name, content, date }) => (
           <li key={id}>
-            <article className="flex gap-2 rounded-md border p-3">
+            <article className="flex gap-2 rounded-md border p-3 shadow-xs">
               <img
                 className="size-10 rounded-full border"
                 src={`https://deno-avatar.deno.dev/avatar/${name}.svg`}

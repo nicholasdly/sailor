@@ -1,3 +1,7 @@
+export const baseUrl = import.meta.env.PROD
+  ? "https://api.sailor.chat"
+  : "http://0.0.0.0:8000";
+
 export const pirates = [
   "Captain Blackheart",
   "Mad Anne Bonny",

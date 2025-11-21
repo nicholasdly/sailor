@@ -1,10 +1,19 @@
-name: ci
+name: Check backend
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+    paths:
+      - api/**
+      - .github/workflows/api-checks.yml
   pull_request:
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
+    paths:
+      - api/**
+      - .github/workflows/api-checks.yml
 
 jobs:
   api:
@@ -34,27 +43,3 @@ jobs:
       - name: Run Pytest
         run: uv run pytest
         working-directory: api/
-
-  www:
-    name: Frontend checks
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: www/
-
-      - name: Compile types
-        run: npm run typecheck
-        working-directory: www/
-
-      - name: Run ESLint
-        run: npm run lint
-        working-directory: www/
-
-      - name: Check formatting
-        run: npm run format:check
-        working-directory: www/

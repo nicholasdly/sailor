@@ -14,7 +14,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",  # Local development
         "http://localhost:4173",  # Local preview
-        "http://localhost:3000",  # Local preview via Docker
+        "http://localhost:3000",  # Local production build via Dockerfile
         "https://sailor.chat",  # Production
     ],
     allow_credentials=True,

@@ -3,7 +3,17 @@ services:
     build: ./api
     ports:
       - "8000:8000"
+    volumes:
+      - ./api:/app # Binds local api/ directory to app/ directory in container.
+      - /app/.venv # Prevents local venv from overwriting container venv.
+    command: ["uv", "run", "fastapi", "dev", "--host", "0.0.0.0"]
   frontend:
-    build: ./www
+    build:
+      context: ./www
+      target: builder
     ports:
-      - "3000:3000"
+      - "5173:5173"
+    volumes:
+      - ./www:/app # Binds local www/ directory to app/ directory in container.
+      - /app/node_modules # Prevents local node_modules from overwriting container node_modules.
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

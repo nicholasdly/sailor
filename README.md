@@ -62,7 +62,7 @@ docker compose up
 
 ## Deployment
 
-Both the backend and frontend are deployed on [Fly.io](https://fly.io). This is done automatically via GitHub Actions.
+Both the backend and frontend are deployed on [Fly.io](https://fly.io) using their respective Dockerfiles. This is done automatically via GitHub Actions.
 
 ## License
 

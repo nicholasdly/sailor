@@ -20,11 +20,7 @@ function OutageAlert() {
 }
 
 export default function App() {
-  const {
-    data: healthy,
-    error,
-    isLoading,
-  } = useSWR(baseUrl + "/health", healthFetcher);
+  const { data: healthy, error } = useSWR(baseUrl + "/health", healthFetcher);
 
   return (
     <main className="mx-auto flex max-w-lg flex-col gap-6 p-4">
@@ -59,7 +55,7 @@ export default function App() {
           </li>
         </ul>
       </div>
-      {!isLoading && (error || !healthy) && <OutageAlert />}
+      {(error || !healthy) && <OutageAlert />}
       <Chat />
     </main>
   );
